@@ -20,9 +20,9 @@ import { error } from 'util';
       private env: EnvService,
     ) { }
   
-  register(fName: string, lName: string, email: string, telNumber: number, pwd: string) {
+  register(fName: string, lName: string, email: string, pwd: string) {
       return this.http.post(this.env.API_URL + 'inscription',
-        {name: fName, lastname: lName, mail: email, tel: telNumber, password: pwd})
+        {name: fName, lastname: lName, mail: email, password: pwd})
         .pipe(
           tap(token => {
             this.token = token;
