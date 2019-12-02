@@ -1,10 +1,15 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+
     <ion-title color="light">Connexion</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="padding center text-center">
+<ion-content padding center text-center>
+  <ion-grid>
   <form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
 
     <ion-item>
@@ -16,8 +21,11 @@
     <ion-label position="floating" >Mot de passe</ion-label>
     <ion-input type="password" formControlName="password"></ion-input>
   </ion-item>
-    
-    <ion-button text-align="center" color="secondary" class="submit-btn" type="submit" [disabled]="!validations_form.valid">Valider</ion-button>
-  
+    <ion-row>
+      <ion-col align-self-center class="submit"><ion-button color="secondary" class="submit-btn" type="submit" [disabled]="!validations_form.valid">Valider</ion-button></ion-col>
+    </ion-row>
   </form>
+</ion-grid>
 </ion-content>
+
+

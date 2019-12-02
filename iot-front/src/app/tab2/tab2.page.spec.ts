@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 
 import { SigninPage } from './tab2.page';
 
@@ -10,7 +12,8 @@ describe('SigninPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SigninPage],
-      imports: [IonicModule.forRoot()]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
     }).compileComponents();
 
     fixture = TestBed.createComponent(SigninPage);
