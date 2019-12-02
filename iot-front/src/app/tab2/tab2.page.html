@@ -1,9 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab Two
-    </ion-title>
+    <ion-title color="light">Connexion</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content class="padding center text-center">
+  <form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" >Mot de passe</ion-label>
+    <ion-input type="password" formControlName="password"></ion-input>
+  </ion-item>
+    
+    <ion-button text-align="center" color="secondary" class="submit-btn" type="submit" [disabled]="!validations_form.valid">Valider</ion-button>
+  
+  </form>
+</ion-content>

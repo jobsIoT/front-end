@@ -1,1 +1,55 @@
 
+ion-header{
+    --ion-background-color:#00634F;
+}
+
+ion-header::after {
+    background-image: none;
+    }
+
+ion-title{
+    margin-left: -10%;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+ion-content{
+    --ion-background-color:#00634F;
+}
+
+ion-button{
+    margin-bottom: 2vh;
+    width:90%;
+
+    font-size: 18px;
+    font-family: Avenir;
+}
+
+ion-item{
+    color: #FFFFFF;
+    font-family: Avenir;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 19px;
+}
+
+ion-input{
+    font-family: Avenir;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 19px;
+}
+
+p{
+    color:#FFFFFF;
+    font-size: 13px;
+    font-family: Avenir;
+    font-weight: 400;
+    line-height: 19px;
+    text-align: right;
+}
+
+.bottomRow
+{
+  margin-top: -20px;
+}
