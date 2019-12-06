@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="secondary" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title color="secondary">Sign In</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="padding center text-center">
+  <ion-grid>
+    <ion-row><ion-card></ion-card></ion-row>
+    <ion-row><ion-card></ion-card></ion-row>
+  </ion-grid>
+  <form [formGroup]="validationsForm" (ngSubmit)="onSubmit(validationsForm.value)">
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" >Password</ion-label>
+    <ion-input type="password" formControlName="password"></ion-input>
+  </ion-item>
+  <ion-grid>
+    <ion-row class="align-self-center">
+      <ion-button text-align="center" color="secondary" class="submit-btn" type="submit" [disabled]="!validationsForm.valid">Sign in</ion-button>
+    </ion-row>
+  </ion-grid>
+    
+  </form>
+</ion-content>

@@ -1,0 +1,30 @@
+ion-header{
+  --ion-background-color:#00A6FF;
+}
+
+ion-title{
+  text-align: center;
+  color: #FFFFFF;
+}
+
+ion-content{
+  --ion-background-color:#00A6FF;
+}
+
+ion-button{
+  margin-bottom: 2vh;
+  width: 100%;
+  height: 10vh;
+
+  font-size: 18px;
+  font-family: Arial;
+
+  --border-color:#8190A5;
+  --border-style:solid;
+  --border-width: 1px;
+}
+
+img{
+  width: auto;
+  margin: auto;
+}

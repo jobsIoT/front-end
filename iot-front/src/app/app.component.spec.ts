@@ -4,6 +4,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 
@@ -25,10 +26,11 @@ describe('AppComponent', () => {
         { provide: SplashScreen, useValue: splashScreenSpy },
         { provide: Platform, useValue: platformSpy },
       ],
+      imports: [ RouterTestingModule.withRoutes([])],
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
+  it('should create the app', async () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
@@ -42,6 +44,34 @@ describe('AppComponent', () => {
     expect(splashScreenSpy.hide).toHaveBeenCalled();
   });
 
-  // TODO: add more tests!
+  it('should have menu labels', async () => {
+    const fixture = await TestBed.createComponent(AppComponent);
+    await fixture.detectChanges();
+    const app = fixture.nativeElement;
+    const menuItems = app.querySelectorAll('ion-label');
+    expect(menuItems.length).toEqual(7);
+    expect(menuItems[0].textContent).toContain('Accueil');
+    expect(menuItems[1].textContent).toContain('Configurer mon appareil');
+    expect(menuItems[2].textContent).toContain('Gérer mes programmes');
+    expect(menuItems[3].textContent).toContain('Profil');
+    expect(menuItems[4].textContent).toContain('Statistiques');
+    expect(menuItems[5].textContent).toContain('Conseils');
+    expect(menuItems[6].textContent).toContain('Home');
+  });
+
+  it('should have urls', async () => {
+    const fixture = await TestBed.createComponent(AppComponent);
+    await fixture.detectChanges();
+    const app = fixture.nativeElement;
+    const menuItems = app.querySelectorAll('ion-item');
+    expect(menuItems.length).toEqual(7);
+    expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/main');
+    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/configure-device-main');
+    expect(menuItems[2].getAttribute('ng-reflect-router-link')).toEqual('/manage-programs');
+    expect(menuItems[3].getAttribute('ng-reflect-router-link')).toEqual('/profil');
+    expect(menuItems[4].getAttribute('ng-reflect-router-link')).toEqual('/statistics-main');
+    expect(menuItems[5].getAttribute('ng-reflect-router-link')).toEqual('/advice');
+    expect(menuItems[6].getAttribute('ng-reflect-router-link')).toEqual('/home');
+  });
 
 });

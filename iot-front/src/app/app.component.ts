@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-
-import { Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -10,18 +10,32 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  public appPages = [
+    {
+      title: 'Journeys',
+      url: '/journeys',
+      icon: 'car'
+    },
+    {
+      title: 'Stats',
+      url: '/statistics',
+      icon: 'stats'
+    },
+    {
+      title: 'Account',
+      url: '/profil',
+      icon: 'person'
+    },
+    {
+      title: 'Sign Out',
+      url: '/home',
+      icon: 'power'
+    },
+  ];
+
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
-  ) {
-    this.initializeApp();
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
+    private menuController: MenuController,
+    private router: Router
+  ) { }
 }
