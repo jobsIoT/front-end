@@ -5,11 +5,11 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "node --max_old_space_size=8192 ng serve",
+    "start": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng serve",
     "build": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build",
-    "test": "node --max_old_space_size=8192 ng test",
-    "lint": "node --max_old_space_size=8192 ng lint",
-    "e2e": "node --max_old_space_size=8192 ng e2e"
+    "test": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng test",
+    "lint": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng lint",
+    "e2e": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng e2e"
   },
   "private": true,
   "dependencies": {
