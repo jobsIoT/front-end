@@ -15,7 +15,7 @@ export class StatisticsPage implements OnInit {
   protected segmentChanged: string;
   protected bars: any;
   protected dateNow: string;
-  @ViewChild('barChart') barChart;
+  @ViewChild('barChart', {static: false}) barChart;
 
   constructor(private statisticsService: StatisticsService, private alertService: AlertService) {
     this.segmentChanged = 'histo';
