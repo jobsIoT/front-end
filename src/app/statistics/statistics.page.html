@@ -8,9 +8,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-list-header color="light">Select period here</ion-list-header>
+  <ion-list-header color="light">
+     <ion-item>
+        <ion-label>date</ion-label>
+        <ion-select interface="popover" (ionChange)="onChange($event)">
+          <ion-item *ngFor="let entry of listdate">
+            <ion-select-option value="{{entry}}">{{entry}}</ion-select-option>
+          </ion-item>
+        </ion-select>
+     </ion-item>
+  </ion-list-header>
+
   <ion-card class="welcome-card">
-    <ion-card-header>
+    <ion-item *ngIf="!dateSelected">
+      Please select a date
+    </ion-item>
+    <ion-card-header *ngIf="dateSelected">
       <ion-card-subtitle>Evolution of the cardiaque rythme on</ion-card-subtitle>
       <ion-card-title>{{dateNow}}</ion-card-title>
     </ion-card-header>

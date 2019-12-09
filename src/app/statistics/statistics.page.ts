@@ -4,7 +4,6 @@ import { StatisticsService } from './service/statistics.service';
 import { Chart } from 'chart.js';
 
 
-
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.page.html',
@@ -15,6 +14,8 @@ export class StatisticsPage implements OnInit {
   protected segmentChanged: string;
   protected bars: any;
   protected dateNow: string;
+  protected dateSelected: boolean;
+  protected listdate: any;
   @ViewChild('barChart', {static: false}) barChart;
 
   constructor(private statisticsService: StatisticsService, private alertService: AlertService) {
@@ -22,18 +23,25 @@ export class StatisticsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.dateSelected = false;
     this.loadCardiaque();
-    this.dateNow = 'Date here';
+    this.dateNow = '';
+  }
+
+  onChange($event) {
+    this.dateSelected = true;
+    this.dateNow = $event.target.value;
+    this.createChart();
   }
 
   createChart() {
     let x = [];
     let date = [];
-    console.log(this.pullsList);
     for (let i = 0; i < this.pullsList.length; i++) {
-      x.push(this.pullsList[i].rythme);
-      date.push(this.pullsList[i].date);
-      this.dateNow = this.pullsList[i].date;
+      if(this.pullsList[i].date.split(' ')[0] === this.dateNow) {
+       x.push(this.pullsList[i].rythme);
+       date.push(this.pullsList[i].date.split(' ')[1]);
+      }
     }
     this.bars = new Chart(this.barChart.nativeElement, {
       type: 'line',
@@ -63,8 +71,14 @@ export class StatisticsPage implements OnInit {
     this.statisticsService.load_cardiaque()
     .subscribe(
       data => {
+        this.listdate = [];
+        for(let x in data) {
+          if(!this.listdate.includes(data[x].date.split(' ')[0])){
+            this.listdate.push(data[x].date.split(' ')[0]);
+          }
+        }
+        console.log(this.listdate);
         this.pullsList = data;
-        this.createChart();
       },
       error => {
         if (error.status === 400) {
