@@ -10,29 +10,35 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  public appPages = [
-    {
-      title: 'Journeys',
-      url: '/journeys',
-      icon: 'car'
-    },
-    {
-      title: 'Stats',
-      url: '/statistics',
-      icon: 'stats'
-    },
-    {
-      title: 'Account',
-      url: '/profil',
-      icon: 'person'
-    },
-    {
-      title: 'Sign Out',
-      url: '/home',
-      icon: 'power'
-    },
-  ];
-
+  public appPages: any;
+  public id = setInterval(() => {
+    if (sessionStorage.getItem('isConnected') === 'true') {
+      this.appPages = [
+        {
+          title: 'Journeys',
+          url: '/journeys',
+          icon: 'car'
+        },
+        {
+          title: 'Stats',
+          url: '/statistics',
+          icon: 'stats'
+        },
+        {
+          title: 'Account',
+          url: '/profil',
+          icon: 'person'
+        },
+        {
+          title: 'Sign Out',
+          url: '/home',
+          icon: 'power'
+        },
+      ];
+    } else {
+      this.appPages = [];
+    }
+  }, 500);
   constructor(
     private platform: Platform,
     private menuController: MenuController,

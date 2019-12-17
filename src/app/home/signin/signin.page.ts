@@ -34,17 +34,17 @@ export class SigninPage implements OnInit {
   onSubmit(values) {
     this.authService.login(values.email, values.password).subscribe(
       data => {
-        this.alertService.presentToast('Connexion réussi !');
+        this.alertService.presentToast('Hello ' + sessionStorage.getItem('firstname') + ' !');
         this.navCtrl.navigateRoot('/journeys');
       },
       error => {
         console.log('error', error.status);
         if (error.status === 400) {
-          this.alertService.presentToast('Le mot de passe est incorrect');
+          this.alertService.presentToast('Incorrect Password');
         } else if (error.status === 404) {
-          this.alertService.presentToast('L\'utilisateur n\'existe pas');
+          this.alertService.presentToast('Unknowed user');
         } else {
-          this.alertService.presentToast('Une erreur s\'est produite ');
+          this.alertService.presentToast('Oops, something fail !');
         }
       }
     );

@@ -33,6 +33,7 @@ export class AuthService {
           sessionStorage.setItem('email', this.token.email);
           sessionStorage.setItem('serialnumber', this.token.serialnumber);
           sessionStorage.setItem('ispremium', this.token.ispremium);
+          sessionStorage.setItem('isConnected', 'true');
           return token;
         }),
       );
@@ -51,6 +52,7 @@ export class AuthService {
           sessionStorage.setItem('email', this.token.email);
           sessionStorage.setItem('serialnumber', this.token.serialnumber);
           sessionStorage.setItem('ispremium', this.token.ispremium);
+          sessionStorage.setItem('isConnected', 'true');
           return token;
         }),
       );
@@ -74,6 +76,16 @@ export class AuthService {
     );
   }
 
+  load_journeys() {
+    return this.http.post(this.env.API_URL + 'get_journeys',
+    {email: sessionStorage.getItem('email')})
+      .pipe(
+        tap(token => {
+          this.token = token;
+          return token;
+        }),
+      );
+  }
   getUserId() {
     return sessionStorage.getItem('user_id');
   }

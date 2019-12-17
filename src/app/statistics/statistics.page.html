@@ -30,5 +30,7 @@
     <ion-card-content>
       <canvas #barChart></canvas>
     </ion-card-content>
+    <ion-button color="secondary" *ngIf="dateSelected" disabled="{{!possiblePrevious}}" (click)="minusShift()">Previous data</ion-button>
+    <ion-button color="secondary" *ngIf="dateSelected" disabled="{{!possibleNext}}" (click)="addShift()">Next data</ion-button>
   </ion-card>
 </ion-content>

@@ -16,6 +16,9 @@ export class StatisticsPage implements OnInit {
   protected dateNow: string;
   protected dateSelected: boolean;
   protected listdate: any;
+  protected shift: any;
+  protected possibleNext: boolean;
+  protected possiblePrevious: boolean;
   @ViewChild('barChart', {static: false}) barChart;
 
   constructor(private statisticsService: StatisticsService, private alertService: AlertService) {
@@ -26,11 +29,27 @@ export class StatisticsPage implements OnInit {
     this.dateSelected = false;
     this.loadCardiaque();
     this.dateNow = '';
+    this.shift = 0;
+    this.possibleNext = false;
+    this.possiblePrevious = false;
   }
 
   onChange($event) {
     this.dateSelected = true;
     this.dateNow = $event.target.value;
+    this.shift = 0;
+    this.possibleNext = false;
+    this.possiblePrevious = false;
+    this.createChart();
+  }
+
+  addShift() {
+    this.shift += 1;
+    this.createChart();
+  }
+
+  minusShift() {
+    this.shift -= 1;
     this.createChart();
   }
 
@@ -38,18 +57,34 @@ export class StatisticsPage implements OnInit {
     let x = [];
     let date = [];
     for (let i = 0; i < this.pullsList.length; i++) {
-      if(this.pullsList[i].date.split(' ')[0] === this.dateNow) {
+      if (this.pullsList[i].date.split(' ')[0] === this.dateNow) {
        x.push(this.pullsList[i].rythme);
        date.push(this.pullsList[i].date.split(' ')[1]);
       }
     }
+    if (x.length > this.shift * 7 + 7) {
+      this.possibleNext = true;
+    } else {
+      this.possibleNext = false;
+    }
+    if (this.shift !== 0) {
+      this.possiblePrevious = true;
+    } else {
+      this.possiblePrevious = false;
+    }
+    let valueShown = [];
+    let dateShown = [];
+    for (let i = this.shift * 7; i < x.length && i < this.shift * 7 + 7; i++) {
+      valueShown.push(x[i]);
+      dateShown.push(date[i]);
+    }
     this.bars = new Chart(this.barChart.nativeElement, {
       type: 'line',
       data: {
-        labels: date,
+        labels: dateShown,
         datasets: [{
           label: 'Rythme in bpm',
-          data: x,
+          data: valueShown,
           backgroundColor: 'rgb(0, 0, 0, 0)', // array should have same number of elements as number of dataset
           borderColor: 'rgb(38, 194, 129)',// array should have same number of elements as number of dataset
           borderWidth: 1
@@ -77,7 +112,6 @@ export class StatisticsPage implements OnInit {
             this.listdate.push(data[x].date.split(' ')[0]);
           }
         }
-        console.log(this.listdate);
         this.pullsList = data;
       },
       error => {
