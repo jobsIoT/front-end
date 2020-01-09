@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <table id="t01" style="width:100%">
+    <tr>
+      <th>Username</th>
+      <th>Premium user</th>
+      <th>Admin user</th>
+      <th>Delete user</th>
+    </tr>
+    <tr *ngFor="let entry of users">
+      <td>{{entry.firstname}} {{entry.lastname}}</td>
+      <td>{{entry.ispremium}}</td>
+      <td>{{entry.isadmin}}</td>
+      <td (click)="deleteUser(entry.email)" class="bt" style="color: red;">✘</td>
+    </tr>
+  </table>
+</ion-content>

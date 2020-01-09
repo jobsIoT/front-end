@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild  } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { StatisticsService } from './service/statistics.service';
 import { Chart } from 'chart.js';
+import { Observable } from 'rxjs';
+import { interval } from 'rxjs';
+
 
 
 @Component({
@@ -27,7 +30,10 @@ export class StatisticsPage implements OnInit {
 
   ngOnInit() {
     this.dateSelected = false;
-    this.loadCardiaque();
+    interval(1000)
+    .subscribe((val) => {
+      this.loadCardiaque();
+    });
     this.dateNow = '';
     this.shift = 0;
     this.possibleNext = false;
@@ -107,8 +113,8 @@ export class StatisticsPage implements OnInit {
     .subscribe(
       data => {
         this.listdate = [];
-        for(let x in data) {
-          if(!this.listdate.includes(data[x].date.split(' ')[0])){
+        for (let x in data) {
+          if (!this.listdate.includes(data[x].date.split(' ')[0])) {
             this.listdate.push(data[x].date.split(' ')[0]);
           }
         }

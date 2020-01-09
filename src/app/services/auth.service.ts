@@ -22,7 +22,7 @@ export class AuthService {
 
   signup(userFirstname: string, userLastname: string, userEmail: string, userPassword: string) {
     return this.http.post(this.env.API_URL + 'inscription',
-      {firstname: userFirstname, lastname: userLastname, email: userEmail, password: userPassword, ispremium: false, serialnumber: ''})
+      {firstname: userFirstname, lastname: userLastname, email: userEmail, password: userPassword, ispremium: false, serialnumber: '', isadmin: false})
       .pipe(
         tap(token => {
           this.token = token;
@@ -53,6 +53,7 @@ export class AuthService {
           sessionStorage.setItem('serialnumber', this.token.serialnumber);
           sessionStorage.setItem('ispremium', this.token.ispremium);
           sessionStorage.setItem('isConnected', 'true');
+          sessionStorage.setItem('isAdmin', this.token.isadmin);
           return token;
         }),
       );

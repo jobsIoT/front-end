@@ -12,7 +12,11 @@ const routes: Routes = [
   { path: 'signup', loadChildren: './home/signup/signup.module#SignupPageModule' },
   { path: 'profil', loadChildren: './profil/profil.module#ProfilPageModule' },
   { path: 'statistics', loadChildren: './statistics/statistics.module#StatisticsPageModule' },
-  { path: 'journeys', loadChildren: './home/journeys/journeys.module#JourneysPageModule' }
+  { path: 'journeys', loadChildren: './home/journeys/journeys.module#JourneysPageModule' },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
+  }
 ];
 
 @NgModule({

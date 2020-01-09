@@ -12,7 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   public appPages: any;
   public id = setInterval(() => {
-    if (sessionStorage.getItem('isConnected') === 'true') {
+    if (sessionStorage.getItem('isConnected') === 'true' && sessionStorage.getItem('isAdmin') === 'false') {
       this.appPages = [
         {
           title: 'Journeys',
@@ -28,6 +28,19 @@ export class AppComponent {
           title: 'Account',
           url: '/profil',
           icon: 'person'
+        },
+        {
+          title: 'Sign Out',
+          url: '/home',
+          icon: 'power'
+        },
+      ];
+    } else if (sessionStorage.getItem('isAdmin') === 'true') {
+       this.appPages = [
+        {
+          title: 'Dashboard',
+          url: '/admin',
+          icon: 'settings'
         },
         {
           title: 'Sign Out',
